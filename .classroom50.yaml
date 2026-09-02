@@ -1,0 +1,12 @@
+schema: "classroom50/repo-config/v1"
+classroom: "embeddedai-fall2026"
+assignment: "lab0-hello-world"
+owner:
+  username: "caskeyvl"
+  id: 78925941
+  accepted_at: "2026-09-02T14:53:46Z"
+source:
+  owner: "ColoradoEmbeddedAI-Fall2026"
+  owner_id: 305599173
+  repo: "lab0_hello_world_provided"
+  branch: "main"
