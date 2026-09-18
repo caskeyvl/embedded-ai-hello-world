@@ -1,0 +1,7 @@
+{
+    "executorch_select_ops_list": [
+        "aten::permute_copy.out",
+        "aten::addmm.out",
+        "aten::tanh.out"
+    ]
+}

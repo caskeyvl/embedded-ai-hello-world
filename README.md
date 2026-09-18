@@ -1,8 +1,6 @@
 # lab0_hello_world — sine-inference LED/UART lab
 
-You will build a small neural network that approximates `y = sin(x)` with a neural network, using ExecuTorch on an STM32F407 (Cortex-M4).  You will drive the on-board LED's PWM
-brightness from the model's output, and print `x`, `y`, and `angle` over
-UART every 10 steps.
+You will build a small neural network that approximates `y = sin(x)` with a neural network, using ExecuTorch on an STM32F407 (Cortex-M4). You will drive the on-board LED's PWM brightness from the model's output, and print `x`, `y`, and `angle` over UART every 10 steps.
 
 Note: [ColoradoEmbeddedAI/simple_sine_led](https://github.com/ColoradoEmbeddedAI/simple_sine_led) has code for iterating over a range of values, calculating sine, and then updating the brightness of the LED with PWM.
 
