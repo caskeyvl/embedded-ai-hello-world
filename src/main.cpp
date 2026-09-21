@@ -129,11 +129,15 @@ static void pwm_init(void) {
 }
 
 /* y is the model's sin(angle) output, in [-1, 1] -- map linearly to a
- * [0, 100%] duty cycle: y=-1 -> 0%, y=0 -> 50%, y=+1 -> 100%. */
+ * [0, 100%] duty cycle: y=-1 -> 0%, y=0 -> 50%, y=+1 -> 100%.
+ *
+ * The top is capped at 99% so CCR1 never reaches ARR. Real hardware treats
+ * CCR1 >= ARR as a steady 100%, but Renode's TIM4 model drives the pin
+ * erratically there (0%/100% dropouts near the sine peak). */
 static inline void pwm_set_duty(float y) {
     float ratio = (y + 1.0f) * 0.5f;
     if (ratio < 0.0f) ratio = 0.0f;
-    if (ratio > 1.0f) ratio = 1.0f;
+    if (ratio > 0.99f) ratio = 0.99f;
     TIM4->CCR1 = (uint32_t)(ratio * (float)PWM_PERIOD + 0.5f);
 }
 
@@ -269,9 +273,7 @@ int main() {
     );
     Tensor input_tensor(&input_impl);
 
-    uart_puts("\r\n=== sine inference LED/UART demo ===\r\n");
-
-    uint32_t x = 0;                 /* degrees, wraps 0..359 */
+    uint32_t x = 0;                /* degrees, wraps 0..359 */
     uint32_t next_step = g_ticks;   /* run the first step immediately */
 
     while (1) {
